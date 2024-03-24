@@ -12,13 +12,15 @@ import { Text } from 'react-native-paper';
 import { Button } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { Alert } from 'react-native';
+import instance from "../../AxiosOrder/AxiosOrder";
 
-export default function CustomerRegister() {
+export default function CustomerRegister({navigation}) {
 
     const [name, setName] = React.useState("");
     const [telephoneNum, setTelephoneNum] = React.useState("");
     const [email, setMail] = React.useState("");
     const [password, setPassword] = React.useState("");
+
 
     const saveCustomer = () => {
 
@@ -57,6 +59,7 @@ export default function CustomerRegister() {
           .then((response) => {
             console.log("saved!");
             console.log(response.data);
+            navigation.navigate("Login");
           })
           .catch((error) => {
             console.error("Error saving student:", error);
@@ -69,7 +72,11 @@ export default function CustomerRegister() {
         <KeyboardAvoidingView>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
-            <Text variant="headlineMedium">Customer Register</Text>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <Text variant="titleLarge" style={{ fontWeight: 'bold', borderWidth: 1, borderColor: 'black', padding: 5 }}>
+
+                Welcome To Riyapola Register </Text>
+            </View>
             <TextInput
                 style={styles.txt}
                 mode="outlined"
@@ -105,6 +112,7 @@ export default function CustomerRegister() {
             <Button buttonColor="black" style={styles.btn1} mode="contained" onPress={saveCustomer}>
                 Register
             </Button>
+           
 
 
         </View>
