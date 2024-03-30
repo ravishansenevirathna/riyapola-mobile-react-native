@@ -12,31 +12,36 @@ import { Button } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import instance from "../../AxiosOrder/AxiosOrder";
+import { useState } from "react";
 
 
 
 export default function CustomerLogin({navigation}) {
 
-    const [email, setMail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [email, setMail] = useState("jeewantha@gmail.com");
+    const [password, setPassword] = useState("123");
 
     
 
         const loginCustomer = async () => {
-            try{
+            
             const response = await instance.post('/customer/login', { email: email, password: password });
             console.log(response.data.token);
-            }catch(e){
-                console.log("hi");
-                
-            }
-            console.log(response.data.token);
+            console.log(response.data.customerId);
+            
             const data = response.data;
             await AsyncStorage.setItem('stmToken', data.token)
+            await AsyncStorage.setItem('cusId',data.customerId)
             const token = await AsyncStorage.getItem('stmToken')
-            if(token!=null){
-                navigation.navigate("Drawer")
-            }
+            const cusId = await AsyncStorage.getItem('cusId')
+
+            console.log(token);
+            console.log(cusId);
+
+            navigation.navigate("Drawer")
+            // if(token!=null){
+            //     navigation.navigate("Drawer")
+            // }
             
             
             

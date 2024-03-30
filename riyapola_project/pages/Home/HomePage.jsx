@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { View, FlatList, ScrollView,TouchableOpacity,StyleSheet } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 
@@ -10,13 +12,20 @@ export default function HomePage({navigation}) {
   const [data, setData] = useState([]);
 
   const login = () => {
-   console.log("hiii");
    navigation.navigate("Login");
   }
 
-  const booking = () => {
+    const booking = async () => {
+    
+    const token = await AsyncStorage.getItem('stmToken')
+    if(token!=null){
+  
+      navigation.navigate("Drawer");
+
+    }
+           
    
-    navigation.navigate("BookingPage");
+    
    }
 
 
@@ -24,7 +33,16 @@ export default function HomePage({navigation}) {
     getData();
   }, []);
 
-  const getData = () => {
+  const getData = async () => {
+    const token = await AsyncStorage.getItem('stmToken')
+    if(token!=null){
+          navigation.navigate("Drawer")
+      }
+      else{
+    
+
+    
+    
     axios
       .get('http://192.168.1.178:8080/car/getAllCars')
       .then(function (response) {
@@ -49,7 +67,8 @@ export default function HomePage({navigation}) {
         
         // setLoading(true);
       });
-  };
+  }
+}
 
   const Card1 = ({ brand, model, year, engineCap, fuelType, imageName }) => (
     <Card style={{ margin: 10 }}>
