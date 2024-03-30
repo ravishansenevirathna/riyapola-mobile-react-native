@@ -24,14 +24,14 @@ export default function HomePage({navigation}) {
 
     }
            
-   
-    
    }
 
 
   useEffect(() => {
     getData();
   }, []);
+
+  
 
   const getData = async () => {
     const token = await AsyncStorage.getItem('stmToken')
