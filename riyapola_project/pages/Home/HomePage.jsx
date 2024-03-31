@@ -15,14 +15,9 @@ export default function HomePage({navigation}) {
    navigation.navigate("Login");
   }
 
-    const booking = async () => {
+    const booking = () => {
     
-    const token = await AsyncStorage.getItem('stmToken')
-    if(token!=null){
-  
-      navigation.navigate("Drawer");
-
-    }
+      navigation.navigate("Login");
            
    }
 

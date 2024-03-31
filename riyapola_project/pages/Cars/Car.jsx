@@ -4,7 +4,11 @@ import { Button, Card, Text } from 'react-native-paper';
 import axios from 'axios';
 
 export default function Cars({navigation}) {
+
+
     const [data, setData] = useState([]);
+    const [selectedCar, setSelectedCar] = useState(null); // State to store selected car
+
   
   
     useEffect(() => {
@@ -38,10 +42,12 @@ export default function Cars({navigation}) {
         });
     };
 
-    const booking = () => {
-      navigation.navigate("Booking");
-
-    }
+    const handleBook = (car) => {
+      setSelectedCar(car); // Store selected car details
+      console.log('Selected Car:', car);
+      navigation.navigate("Booking", { selectedCar: car });
+    };
+  
   
     const Card1 = ({ id,brand, model, year, engineCap, fuelType, imageName }) => (
       <Card style={{ margin: 10 }}>
@@ -56,7 +62,7 @@ export default function Cars({navigation}) {
         <Card.Actions>
         <Text style={styles.smallRedText}>Available</Text>
           
-          <Button onPress={booking}>Book</Button>
+        <Button onPress={() => handleBook({ id, brand, model, year, engineCap, fuelType, imageName })}>Book</Button>
         </Card.Actions>
       </Card>
     );
@@ -82,7 +88,7 @@ export default function Cars({navigation}) {
             data={data}
             renderItem={({ item }) => (
               <Card1
-                id={item.carId}
+                id={item.id}
                 brand={item.brand}
                 model={item.model}
                 year={item.year}

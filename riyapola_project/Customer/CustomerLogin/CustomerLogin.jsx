@@ -18,8 +18,8 @@ import { useState } from "react";
 
 export default function CustomerLogin({navigation}) {
 
-    const [email, setMail] = useState("jeewantha@gmail.com");
-    const [password, setPassword] = useState("123");
+    const [email, setMail] = useState("");
+    const [password, setPassword] = useState("");
 
     
 
