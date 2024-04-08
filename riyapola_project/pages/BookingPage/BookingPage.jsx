@@ -16,9 +16,15 @@ export default function BookingPage({ route }) {
   const [selectedCar, setSelectedCar] = useState(null);
 
   useEffect(() => {
-    const { selectedCar } = route.params; // Access passed car object
-    setSelectedCar(selectedCar);
+    if(route.params == null){
+      console.log("hihi")
+     
+    }
+    else{const { selectedCar } = route.params; // Access passed car object
+    setSelectedCar(selectedCar);}
+    
   }, [route.params]);
+
 
 
 
@@ -109,19 +115,26 @@ export default function BookingPage({ route }) {
                   style={styles.detailInput}
                   value={selectedCar.fuelType}
                   editable={false}
-                 
+              
                 />
               </View>
 
               {/* <Text>Image Name: {selectedCar.imageName}</Text> */}
+              <Button style={styles.bookButton} mode="contained" onPress={bookThisCar}>
+            Book Car
+          </Button>
 
             </View>
 
+
           )}
 
-          <Button style={styles.bookButton} mode="contained" onPress={bookThisCar}>
-            Book This Car
-          </Button>
+          <Text>please select your car!</Text>
+
+          {/* <Button style={styles.bookButton} mode="contained" onPress={bookThisCar}>
+            Book Car
+          </Button> */}
+
 
         </View>
       </TouchableWithoutFeedback>
