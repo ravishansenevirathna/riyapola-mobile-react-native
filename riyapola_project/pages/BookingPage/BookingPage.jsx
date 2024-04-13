@@ -4,25 +4,38 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView
 } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Button } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import instance from "../../AxiosOrder/AxiosOrder";
 
 
 export default function BookingPage({ route }) {
 
   const [selectedCar, setSelectedCar] = useState(null);
 
+  const [startDate, setStartDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [pickUpLocation, setPickUpLocation] = useState("");
+  const [status, setStatus] = useState("waiting");
+
+
+
   useEffect(() => {
-    if(route.params == null){
+    if (route.params == null) {
       console.log("hihi")
-     
+
     }
-    else{const { selectedCar } = route.params; // Access passed car object
-    setSelectedCar(selectedCar);}
-    
+    else {
+      const { selectedCar } = route.params; // Access passed car object
+      setSelectedCar(selectedCar);
+    }
+
   }, [route.params]);
 
 
@@ -30,16 +43,35 @@ export default function BookingPage({ route }) {
 
   const bookThisCar = async () => {
 
-    const cusId = await AsyncStorage.getItem('cusId')
-    console.log(cusId);
+    const cusId = await AsyncStorage.getItem('cusId');
 
-    console.log("Booking car:", selectedCar);
+    instance.post('/reservation/addNewReservation', {
+      startDate: startDate,
+      startTime: startTime,
+      endDate: endDate,
+      endTime: endTime,
+      pickUpLocation: pickUpLocation,
+      carId: selectedCar.id,
+      customerId: cusId,
+      status: status
+
+    })
+      .then((response) => {
+        console.log("sent!gfggfgfgfgf");
+        console.log(response.data);
+
+      })
+      .catch((error) => {
+        console.error("Error saving reservation :", error);
+        // Alert.alert("Error:", "An error occurred while saving the student.");
+      });
 
 
   }
 
 
   return (
+    <ScrollView>
     <KeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -56,7 +88,7 @@ export default function BookingPage({ route }) {
 
               <Text style={styles.detailsTitle}>Your Car Details</Text>
 
-              
+
               <View style={styles.detailRow}>
 
                 <TextInput style={styles.detailLabel} editable={false}>ID :  </TextInput>
@@ -64,7 +96,7 @@ export default function BookingPage({ route }) {
                   style={styles.detailInput}
                   value={selectedCar.id.toString()}
                   editable={false} // Disable text input
-                 
+
                 />
               </View>
 
@@ -74,7 +106,7 @@ export default function BookingPage({ route }) {
                   style={styles.detailInput}
                   value={selectedCar.brand}
                   editable={false}
-                 
+
                 />
               </View>
 
@@ -85,7 +117,7 @@ export default function BookingPage({ route }) {
                   style={styles.detailInput}
                   value={selectedCar.model}
                   editable={false}
-                 
+
                 />
               </View>
 
@@ -95,7 +127,7 @@ export default function BookingPage({ route }) {
                   style={styles.detailInput}
                   value={selectedCar.year.toString()}
                   editable={false}
-                 
+
                 />
               </View>
 
@@ -105,7 +137,7 @@ export default function BookingPage({ route }) {
                   style={styles.detailInput}
                   value={selectedCar.engineCap}
                   editable={false}
-                 
+
                 />
               </View>
 
@@ -115,14 +147,62 @@ export default function BookingPage({ route }) {
                   style={styles.detailInput}
                   value={selectedCar.fuelType}
                   editable={false}
-              
+
+                />
+              </View>
+
+              <Text style={styles.bookingDetailsTitle}>Booking Details</Text>
+
+              <View style={styles.detailRow}>
+                <TextInput
+                  style={styles.detailLabel}
+                  placeholder="Start Date"
+                  value={startDate}
+                  onChangeText={startDate => setStartDate(startDate)}
+                />
+              </View>
+
+              <View style={styles.detailRow}>
+                <TextInput
+                  style={styles.detailLabel}
+                  placeholder="Start Time"
+                  value={startTime}
+                  onChangeText={startTime => setStartTime(startTime)}
+                />
+              </View>
+
+              <View style={styles.detailRow}>
+                <TextInput
+                  style={styles.detailLabel}
+                  placeholder="End Date"
+                  value={endDate}
+                  onChangeText={endDate => setEndDate(endDate)}
+                />
+              </View>
+
+              <View style={styles.detailRow}>
+                <TextInput
+                  style={styles.detailLabel}
+                  placeholder="End Time"
+                  value={endTime}
+                  onChangeText={endTime => setEndTime(endTime)}
+                />
+              </View>
+
+              <View style={styles.detailRow}>
+                <TextInput
+                  style={styles.detailLabel}
+                  placeholder="Pick Up Location"
+                  value={pickUpLocation}
+                  onChangeText={pickUpLocation => setPickUpLocation(pickUpLocation)}
                 />
               </View>
 
               {/* <Text>Image Name: {selectedCar.imageName}</Text> */}
               <Button style={styles.bookButton} mode="contained" onPress={bookThisCar}>
-            Book Car
-          </Button>
+                Book Car
+              </Button>
+
 
             </View>
 
@@ -131,14 +211,11 @@ export default function BookingPage({ route }) {
 
           <Text>please select your car!</Text>
 
-          {/* <Button style={styles.bookButton} mode="contained" onPress={bookThisCar}>
-            Book Car
-          </Button> */}
-
 
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
+    </ScrollView>
   )
 }
 
@@ -187,14 +264,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
-   
+
   },
   bookButton: {
-   
+
     backgroundColor: "#333", // Change button color to a darker shade
-      paddingHorizontal: 30, // Add horizontal padding for better spacing
-      paddingVertical: 8, // Add vertical padding for better spacing
-      margin:5
+    paddingHorizontal: 30, // Add horizontal padding for better spacing
+    paddingVertical: 8, // Add vertical padding for better spacing
+    margin: 5
 
   },
 });

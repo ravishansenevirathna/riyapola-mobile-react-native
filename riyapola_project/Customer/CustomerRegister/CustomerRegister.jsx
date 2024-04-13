@@ -27,6 +27,8 @@ export default function CustomerRegister({navigation}) {
 
         let errorMessages = [];
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular expression for email format
+
         if (name.length === 0) {
             errorMessages.push("Please Enter Your Name.");
           }
@@ -35,7 +37,7 @@ export default function CustomerRegister({navigation}) {
             errorMessages.push("Invalid Contact Number");
           }
 
-        if (email.length === 0) {
+        if (!emailRegex.test(email)) {
             errorMessages.push("Invalid Email Address");
           }
 
