@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
 
     },
         smallRedText: {
-          fontSize: 12, // Adjust font size as needed
+          fontSize: 12, 
           color: 'red',
     },
 

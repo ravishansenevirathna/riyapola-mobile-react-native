@@ -15,7 +15,7 @@ export default function CustomerAccount({navigation}) {
 
   const [customerData, setCustomerData] = useState('');
   const [editMode, setEditMode] = useState(false);
-  const passwordInputRef = useRef(null); // Ref for password input
+  const passwordInputRef = useRef(null); 
 
   useEffect(() => {
     getCustomerData();
@@ -108,7 +108,7 @@ export default function CustomerAccount({navigation}) {
         <Card style={styles.card}>
        
           <Card.Content>
-            {editMode ? ( // Conditionally render input fields in edit mode
+            {editMode ? ( 
               <>
                 <View style={styles.detailRow}>
                   <Text style={styles.detailLabel}>Name:</Text>
@@ -181,7 +181,7 @@ export default function CustomerAccount({navigation}) {
           </Card.Content>
           <Button
             style={styles.button}
-            buttonColor={editMode ? "primary" : "black"} // Change button color based on mode
+            buttonColor={editMode ? "primary" : "black"} 
             mode="contained"
             onPress={editMode ? updateAccount : toggleEditMode}
           >
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
   centeredTitle: {
     alignItems: 'center',
     fontSize: 18,
-    // ????????
+   
     
           
   },

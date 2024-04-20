@@ -63,7 +63,7 @@ export default function BookingPage({ route }) {
       })
       .catch((error) => {
         console.error("Error saving reservation :", error);
-        // Alert.alert("Error:", "An error occurred while saving the student.");
+        
       });
 
 
