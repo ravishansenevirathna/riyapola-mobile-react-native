@@ -5,7 +5,7 @@ let cachedToken = null;
 let cachedId = null;
 
 const instance = axios.create({
-  baseURL: 'http://192.168.1.6:8080',
+  baseURL: 'http://192.168.1.3:8080',
   headers: {
     Authorization: cachedToken ? `Bearer ${cachedToken}` : '',
   },
@@ -25,12 +25,12 @@ instance.interceptors.request.use(
       console.log('id ' + cachedId);
 
     } catch (error) {
-      // Handle AsyncStorage errors
+      console.log(error);
     }
     return config;
   },
   error => {
-    // Handle request errors
+    
     return Promise.reject(error);
   },
 );

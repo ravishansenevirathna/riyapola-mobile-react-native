@@ -28,7 +28,7 @@ export default function BookingPage({ route }) {
 
   useEffect(() => {
     if (route.params == null) {
-      console.log("hihi")
+      console.log("working!")
 
     }
     else {
@@ -57,7 +57,6 @@ export default function BookingPage({ route }) {
 
     })
       .then((response) => {
-        console.log("sent!gfggfgfgfgf");
         console.log(response.data);
 
       })
@@ -247,7 +246,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 30,
     fontWeight: 'bold',
-    textAlign: 'center', // Center details title
+    textAlign: 'center', 
   },
   detailRow: {
     flexDirection: 'row',
@@ -260,7 +259,7 @@ const styles = StyleSheet.create({
   },
   detailInput: {
     flex: 1,
-    backgroundColor: '#f1f1f1', // Light gray background for disabled fields
+    backgroundColor: '#f1f1f1', 
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
@@ -268,9 +267,9 @@ const styles = StyleSheet.create({
   },
   bookButton: {
 
-    backgroundColor: "#333", // Change button color to a darker shade
-    paddingHorizontal: 30, // Add horizontal padding for better spacing
-    paddingVertical: 8, // Add vertical padding for better spacing
+    backgroundColor: "#333", 
+    paddingHorizontal: 30, 
+    paddingVertical: 8, 
     margin: 5
 
   },

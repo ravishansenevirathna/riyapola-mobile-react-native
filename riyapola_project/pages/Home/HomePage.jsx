@@ -37,7 +37,7 @@ export default function HomePage({navigation}) {
     
     
     axios
-      .get('http://192.168.1.6:8080/car/getAllCars')
+      .get('http://192.168.1.3:8080/car/getAllCars')
       .then(function (response) {
         console.log(response.data);
         const array = [];
@@ -72,7 +72,7 @@ export default function HomePage({navigation}) {
           <Text>{engineCap + '.' + fuelType}</Text>
         </View>
       </Card.Content>
-      <Card.Cover source={{ uri: `http://192.168.1.6:8080/${imageName}` }} />
+      <Card.Cover source={{ uri: `http://192.168.1.3:8080/${imageName}` }} />
       <Card.Actions>
       <Text style={styles.smallRedText}>Available</Text>
         

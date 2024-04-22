@@ -49,7 +49,7 @@ export default function CustomerRegister({navigation}) {
         if (errorMessages.length > 0) {
             const errorMessage = errorMessages.join("\n"); // Combine error messages for readability
             Alert.alert("Warning!", errorMessage);
-            return; // Prevent API call if there are errors
+            return;
           }
 
           instance.post('/customer/register', {
