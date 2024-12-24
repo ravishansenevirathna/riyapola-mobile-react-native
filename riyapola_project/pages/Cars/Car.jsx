@@ -17,7 +17,7 @@ export default function Cars({navigation}) {
   
     const getData = () => {
       axios
-        .get('http://192.168.1.2:8080/car/getAllCars')
+        .get('http://192.168.1.4:8080/car/getAllCars')
         .then(function (response) {
           console.log(response.data);
           const array = [];

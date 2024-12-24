@@ -27,7 +27,7 @@ export default function CustomerRegister({navigation}) {
 
         let errorMessages = [];
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular expression for email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
 
         if (name.length === 0) {
             errorMessages.push("Please Enter Your Name.");
@@ -47,7 +47,7 @@ export default function CustomerRegister({navigation}) {
 
 
         if (errorMessages.length > 0) {
-            const errorMessage = errorMessages.join("\n"); // Combine error messages for readability
+            const errorMessage = errorMessages.join("\n"); 
             Alert.alert("Warning!", errorMessage);
             return;
           }

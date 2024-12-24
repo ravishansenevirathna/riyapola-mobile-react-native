@@ -17,7 +17,7 @@ export default function CustomerReservationView(){
         console.log("cusId:", cusId);
 
         instance
-          .get('http://192.168.1.2:8080/reservation/searchReservation/'+cusId)
+          .get('http://192.168.1.4:8080/reservation/searchReservation/'+cusId)
           .then(function (response) {
             console.log(response.data);
             console.log("fgfrghfghfg");

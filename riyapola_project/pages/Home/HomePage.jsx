@@ -14,7 +14,7 @@ export default function HomePage({navigation}) {
   }
 
     const booking = () => {
-    
+  
       navigation.navigate("Login");
            
    }
@@ -32,12 +32,8 @@ export default function HomePage({navigation}) {
           navigation.navigate("Drawer")
       }
       else{
-    
-
-    
-    
     axios
-      .get('http://192.168.1.2:8080/car/getAllCars')
+      .get('http://192.168.1.4:8080/car/getAllCars')
       .then(function (response) {
         console.log(response.data);
         const array = [];
@@ -72,7 +68,7 @@ export default function HomePage({navigation}) {
           <Text>{engineCap + '.' + fuelType}</Text>
         </View>
       </Card.Content>
-      <Card.Cover source={{ uri: `http://192.168.1.2:8080/${imageName}` }} />
+      <Card.Cover source={{ uri: `http://192.168.1.4:8080/${imageName}` }} />
       <Card.Actions>
       <Text style={styles.smallRedText}>Available</Text>
         
